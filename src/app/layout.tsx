@@ -6,7 +6,7 @@ import { NavPill } from '@/components/NavPill'
 import { NAV } from '@/lib/nav'
 import { Providers } from '@/components/Providers'
 import { SearchBox } from '@/components/SearchBox'
-import { CONTRACT_ADDRESS, ContractAddress } from '@/components/ContractAddress'
+import { ContractAddress } from '@/components/ContractAddress'
 import { ScrollTach } from '@/components/Reveal'
 import './globals.css'
 
@@ -59,9 +59,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <NavPill />
               </div>
               <div className="ml-auto flex items-center gap-2">
-                <div className="hidden xl:block">
-                  <ContractAddress compact />
-                </div>
                 <a
                   href={X_URL}
                   target="_blank"
@@ -81,7 +78,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
             <div className="flex flex-col items-center gap-2 px-4 pb-2 md:hidden">
               <NavPill />
-              {CONTRACT_ADDRESS ? <ContractAddress compact /> : null}
             </div>
           </header>
 
