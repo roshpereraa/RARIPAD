@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.local
+.next/
+*.log
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+out/
+.vercel
+
+# HyperFrames working files
+videos/*/assets/
+videos/*/renders/
+videos/*/snapshots/
+videos/*/render.log
+.hyperframes/
