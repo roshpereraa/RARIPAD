@@ -1,85 +1,71 @@
-# I shipped a Solana launchpad in one session. The hard part wasn't the code.
+# RARIPAD: a new launchpad for Solana
 
-Everyone building on Solana right now is making the same site.
+Launching a coin should take you two minutes, not two days.
 
-Black background. One neon accent — purple, green, teal, pick your poison. A grid that fades out at the edges. Monospace numbers. A hero that says something about "the future of onchain."
+That's it. That's the whole idea behind RARIPAD.
 
-You've seen it a hundred times. So has every single person you're trying to get to use your product.
+You've got a name, a ticker and an image. Maybe a joke that's going to land. What you don't have is the patience to read documentation, wire up a contract, beg someone for liquidity, or hand your keys to a platform that promises it'll be careful with them.
 
-That's the actual problem. Not the contracts. Not the RPC. The fact that your launchpad looks exactly like the four other launchpads open in their other tabs.
+So we built the shortest line between the idea and the coin. It's live now at **raripad.fun**.
 
-So when I built RARIPAD this week, I made one decision before I wrote a line of code: **the background is yellow.**
+## What you can actually do on it
 
-## Why yellow is a strategy, not a colour
+**Launch a coin.** Name, ticker, logo, a line about what it is. One transaction. No presale, no allocation, no team cut sitting there waiting to dump on the people who believed you first.
 
-Here's the thing about a black site with a neon accent. It's safe. Everything looks premium on black. Bad spacing looks intentional. Weak type looks moody. You can't really get it wrong, which is exactly why nobody gets it right — it all collapses into the same soup.
+**Trade the curve.** Every coin on RARIPAD starts on a bonding curve from the very first block. The full supply is there immediately. Anyone can buy or sell against it, and the price moves with every single fill. No waiting for a listing. No market maker deciding when you're allowed in.
 
-Yellow is not safe. Yellow is loud, and loud is unforgiving. Every bit of lazy spacing shows. Every muddy grey you were hiding on black suddenly screams. You have to actually design it.
+**Graduate.** When the curve sells out, the coin moves onto PumpSwap and keeps trading there. That's the finish line every launch is driving at.
 
-But here's what you get back. Someone scrolls past a screenshot on X and they know it's you before they read a word. That's the entire game. That's branding.
+**Get paid as a creator.** Here's the part most people miss. Every trade on a coin you created pays you a fee. Not just on the curve — after graduation too. It builds up across every coin you've ever launched and sits there until you claim it. There's a page on the site that shows you exactly what you're owed. Connect the wallet you launched with and claim it.
 
-Racing yellow with a red accent and a black prancing horse. Rosso Corsa for the buttons, carbon for the nav and the footer, Modena yellow for everything in between. Nobody in the memecoin space is doing racing livery. Now one of us is.
+Read that last one again. You're not just launching. You're building something that pays you every time it trades.
 
-## The hard part: the thing you can't fake
+## We never touch your money
 
-I had the badge as a JPEG. Red background, black horse, 705 pixels wide.
+This matters more than anything else on this page, so let's be blunt about it.
 
-I could have just slapped that image on the site. Most people do. Then your logo is a blurry rectangle on every retina screen and you can never change its colour, so your "brand mark" only works on one background and you end up designing the whole site around a limitation you created on day one.
+RARIPAD does not hold your keys. RARIPAD does not hold your funds. There is no deposit, no account, no balance sitting on our side of a wall.
 
-Instead I traced it. Threshold the image, clean the JPEG noise, run a contour trace, and out comes a single vector path.
+Every single action is a transaction your own wallet asks you to sign. We can't move your coins. We can't freeze them. We can't rug you, because there's nothing of yours for us to rug.
 
-Why does that matter? Because now the mark is a **mask**, not a picture. One file. Paint it yellow on the black nav. Paint it black at 320 pixels in the hero. Paint it red if I want. And the highlights in the mane and tail are *holes* in the path — so whatever's behind the horse shows through them, exactly the way the real badge is cut.
+Connect Phantom or Solflare, sign what you want to happen, and that's the extent of it.
 
-One file. Any colour. Any size. Zero compromise.
+## Everything on the board is real
 
-That's twenty minutes of work that pays for itself every single time you add a page.
+Open the homepage and you'll see coins moving. New launches, coins climbing toward graduation, coins that already made it, live trades landing as they happen.
 
-## Then I made the dumbest possible mistake
+None of that is a snapshot from a database somewhere. It's read from Solana, live, in your browser, while you're looking at it.
 
-Let's be honest about this part, because everyone skips it.
+Why does that matter to you? Because a number that comes out of someone's database is a number someone can edit. A number read from the chain isn't. When RARIPAD tells you a curve is 60% sold, that's not us telling you — that's the chain telling you, and we just put it on screen.
 
-RARIPAD is forked from berrypad, a launchpad I'd already built. So I cloned berrypad, reskinned the whole thing, deployed it, and it looked incredible.
+There's also a panel showing the coins launched through RARIPAD specifically. Same deal. It's read from the chain, and nobody can buy their way onto that list.
 
-One problem. I'd cloned the wrong branch.
+## Why it looks like a race car
 
-berrypad's default branch is the EVM build — Solidity, wagmi, a completely different chain. The **Solana** build, the one that actually runs on pump.fun's program, was sitting on a second branch I never looked at.
+Go open four Solana sites right now. Black background. One neon accent. A grid that fades at the edges. Same site, four times.
 
-So the beautiful yellow site I'd just shipped was talking to the wrong blockchain entirely.
+We went the other way. Racing yellow, Rosso Corsa red, a black prancing horse. Cars lapping across the page. A tachometer that tracks your scroll.
 
-Here's my point, and it's not "check your branches." It's this: **I found out because I went looking, not because something broke.** The site built. It deployed. It served a 200. Every automated check passed. If I'd trusted the green ticks and walked away, I'd have shipped a Solana launchpad that wasn't on Solana.
+That's not decoration for the sake of it. In a market where every project looks identical, looking like yourself *is* the strategy. You should be able to see one screenshot in a group chat, with no caption, and know it's us.
 
-Your tooling tells you the code *ran*. It does not tell you the code is *right*. Those are different questions and only one of them has an automated answer.
+Loud is a choice. We made it on purpose.
 
-## What actually runs underneath
+## Who this is for
 
-RARIPAD doesn't deploy its own contracts. It launches and trades through **pump.fun's own on-chain program**, using their official SDK. Every instruction is built with their tooling, every read goes straight to a Solana RPC from the browser.
+**If you've got an idea for a coin** and you've been putting it off because the process looked like work — it isn't. Go launch it.
 
-No backend. No database. No indexer I have to keep alive at 3am.
+**If you trade** — the board is live, the curves are real, and you're not waiting on anyone's listing schedule.
 
-And one detail I'm genuinely proud of. Every coin launched through RARIPAD sends a 0 SOL marker to a program-derived address — an address with no private key, that nobody can sign for, me included.
+**If you've launched before and got nothing for it** — go look at the creator fees page. You might be owed money you didn't know existed.
 
-Why bother? Because now "coins launched on RARIPAD" is just that address's transaction history, decoded in the browser. No database to maintain. No list I could quietly edit. And critically, **nobody can fake their way onto it** by sending it money, because the marker only lands in a transaction that genuinely ran a RARIPAD launch.
+## Start here
 
-Trust that doesn't depend on trusting me. That's the whole point of building onchain, and most "onchain" products still just serve you a Postgres table.
+**raripad.fun**
 
-## The moving parts, and why they're not decoration
+Connect your wallet. Launch the coin. Watch every lap of it.
 
-The site has a lot of motion. A speed tunnel behind the hero drawn live on canvas. Cars lapping across a strip of asphalt between sections. A red tachometer needle across the top that tracks your scroll. Cards that travel in as they land.
+Follow [@raripad3](https://x.com/raripad3) for what's launching.
 
-All of it switches off completely if your browser says you prefer reduced motion. One media query, everything decorative stops.
+---
 
-That's not me being nice. If someone gets motion sick on your landing page, they don't file a bug report. They close the tab and you never find out you lost them. Accessibility isn't charity, it's not leaking customers.
-
-## What I'd tell you to steal
-
-**Pick the colour nobody in your category picked.** Then actually design it properly, because the loud one punishes laziness.
-
-**Vector your logo on day one.** As a mask, not an image. The twenty minutes comes back every week.
-
-**Go looking for what's broken.** A green build and a 200 response mean your code ran. Nothing more.
-
-**If the chain can be your database, let it.** Less to run, and more worth trusting.
-
-RARIPAD is live at **raripad.fun** — yellow, loud, and running on pump.fun's program.
-
-Go look at what everyone else in your space has built. Then go build what's next.
+*Coins are volatile and can lose all of their value. Transactions on Solana are irreversible. Nothing here is financial advice — do your own research before you buy anything.*
