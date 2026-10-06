@@ -80,6 +80,6 @@ That's not me being nice. If someone gets motion sick on your landing page, they
 
 **If the chain can be your database, let it.** Less to run, and more worth trusting.
 
-RARIPAD is live at **raripad.vercel.app** — yellow, loud, and running on pump.fun's program.
+RARIPAD is live at **raripad.fun** — yellow, loud, and running on pump.fun's program.
 
 Go look at what everyone else in your space has built. Then go build what's next.
