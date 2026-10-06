@@ -1,23 +1,26 @@
 'use client'
 
 import { useState } from 'react'
-import { getAddress } from 'viem'
-import { explorerAddress } from '@/chain-adapter'
+import { PublicKey } from '@solana/web3.js'
+import { explorerToken } from '@/lib/sol/config'
+import { isSolanaAddress } from '@/lib/sol/format'
 import { RARIPAD_CA } from '@/lib/token'
 
 /**
- * The RARIPAD token address, validated and checksummed once at load.
+ * The RARIPAD token mint, validated once at load.
  *
- * getAddress rejects a malformed or mis-checksummed address outright, so a
- * typo can never render as something copyable.
+ * PublicKey rejects anything that is not a real base58 point, so a typo can
+ * never render as something copyable. The shape check runs first because
+ * PublicKey also accepts shorter strings that are not addresses.
  */
 export const CONTRACT_ADDRESS: string | null = (() => {
   const raw = RARIPAD_CA.trim()
   if (!raw) return null
   try {
-    return getAddress(raw)
+    if (!isSolanaAddress(raw)) throw new Error('not a base58 address')
+    return new PublicKey(raw).toBase58()
   } catch {
-    console.error('RARIPAD_CA is not a valid address:', raw)
+    console.error('RARIPAD_CA is not a valid Solana mint:', raw)
     return null
   }
 })()
@@ -37,7 +40,7 @@ function useCopy(text: string) {
 }
 
 /**
- * The prominent version for the hero: the full address, a copy button and an
+ * The prominent version for the hero: the full mint, a copy button and an
  * explorer link. Renders nothing until the token is live.
  */
 export function ContractAddressHero() {
@@ -51,7 +54,7 @@ export function ContractAddressHero() {
         {copied ? 'Copied ✓' : 'Copy'}
       </button>
       <a
-        href={explorerAddress(CONTRACT_ADDRESS)}
+        href={explorerToken(CONTRACT_ADDRESS)}
         target="_blank"
         rel="noopener noreferrer"
         className="shrink-0 rounded-full border border-white/20 px-3 py-1.5 text-xs text-white/75 transition hover:border-[var(--accent)] hover:text-white"
@@ -66,15 +69,11 @@ export function ContractAddress({ compact = false }: { compact?: boolean }) {
   const address = CONTRACT_ADDRESS
   const { copied, copy } = useCopy(address ?? '')
 
-  if (!address) {
-    return (
-      <span className={`label ${compact ? '' : 'block'}`} title="The token is not live yet">
-        CA · coming soon
-      </span>
-    )
-  }
+  // No mint set: render nothing at all, anywhere it is used. The moment
+  // RARIPAD_CA in lib/token.ts is filled in, the chip reappears everywhere.
+  if (!address) return null
 
-  const short = `${address.slice(0, 6)}…${address.slice(-4)}`
+  const short = `${address.slice(0, 4)}…${address.slice(-4)}`
 
   return (
     <span className="inline-flex items-center gap-1.5">
@@ -88,7 +87,7 @@ export function ContractAddress({ compact = false }: { compact?: boolean }) {
       </button>
       {compact ? null : (
         <a
-          href={explorerAddress(address)}
+          href={explorerToken(address)}
           target="_blank"
           rel="noopener noreferrer"
           className="label hover:text-[var(--accent-hi)]"

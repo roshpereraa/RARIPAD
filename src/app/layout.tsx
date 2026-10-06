@@ -5,25 +5,22 @@ import { Logo } from '@/components/Logo'
 import { NavPill } from '@/components/NavPill'
 import { NAV } from '@/lib/nav'
 import { Providers } from '@/components/Providers'
-import { ScrollTach } from '@/components/Reveal'
 import { SearchBox } from '@/components/SearchBox'
-import { CONTRACT_ADDRESS, ContractAddress } from '@/components/ContractAddress'
+import { ContractAddress } from '@/components/ContractAddress'
+import { ScrollTach } from '@/components/Reveal'
 import './globals.css'
 
 export const metadata = {
-  title: 'RARIPAD — the launchpad for AI-agent tokens',
+  title: 'RARIPAD — the launchpad for coins on Solana',
   description:
-    'Launch and trade AI-agent tokens on Robinhood Chain. Bonding curves that graduate into locked Uniswap pools, read live from the chain.',
+    'Launch and trade coins on Solana through pump.fun. Bonding curves that graduate onto PumpSwap, read live from the chain in your browser.',
 }
 
 /** Modena yellow, so the browser chrome matches the page on mobile. */
 export const viewport = { themeColor: '#f7c600' }
 
-/**
- * The project's X account, linked from the header and the footer.
- * One constant: point it at the RARIPAD account when that handle is live.
- */
-const X_URL = 'https://x.com/Berrypad3'
+/** The project's X account, linked from the header and the footer. */
+const X_URL = 'https://x.com/raripad3'
 
 function XIcon({ size = 15 }: { size?: number }) {
   return (
@@ -62,9 +59,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <NavPill />
               </div>
               <div className="ml-auto flex items-center gap-2">
-                <div className="hidden xl:block">
-                  <ContractAddress compact />
-                </div>
                 <a
                   href={X_URL}
                   target="_blank"
@@ -84,13 +78,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
             <div className="flex flex-col items-center gap-2 px-4 pb-2 md:hidden">
               <NavPill />
-              {CONTRACT_ADDRESS ? <ContractAddress compact /> : null}
             </div>
           </header>
 
           <main className="mx-auto max-w-[1400px] px-4 py-6">{children}</main>
 
-          {/* The chequered flag, then carbon: the page's bottom bracket. */}
           <div className="checker mt-20 h-4" aria-hidden />
           <footer className="carbon px-4 pb-10 pt-12 text-[#fffdf4]">
             <div className="mx-auto max-w-[1400px]">
@@ -98,8 +90,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <div className="lg:col-span-2">
                   <Logo size={28} withWordmark color="#f7c600" />
                   <p className="mt-4 max-w-sm leading-relaxed text-white/55">
-                    Launch the coin. Watch every lap of it. RARIPAD never holds keys or funds —
-                    every action is signed by your own wallet.
+                    Launch the coin. Watch every lap of it. RARIPAD never holds keys or funds — every action is signed by your own wallet.
                   </p>
                   <div className="mt-4">
                     <ContractAddress />
