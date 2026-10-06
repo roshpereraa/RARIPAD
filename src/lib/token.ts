@@ -8,4 +8,4 @@
  *
  * This is a Solana mint in base58, not an 0x address.
  */
-export const RARIPAD_CA = ''
+export const RARIPAD_CA = 'FHQSmYdN9DAvScCHzk9DPGvjxHgD2m11U4pr2rYqpump'
